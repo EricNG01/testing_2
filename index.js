@@ -22,6 +22,11 @@ app.get("/api/search", (req, res) => {
     // Construct the wiki URL and redis key (reduced font size for clarity)
     const searchUrl = `https://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&page=${query}`;
     const redisKey = `wikipedia:${query}`; 
+    redisClient.setEx( 
+        redisKey, 
+        3600, 
+        JSON.stringify(`wikipedia:${query}`)
+    );
     redisClient.get(redisKey).then((result) => { 
     if (result) {
         // Serve from redis

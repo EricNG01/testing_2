@@ -12,7 +12,7 @@ const app = express();
 // Redis setup
 const redisClient = redis.createClient({
     socket: {
-        host: 'assignment2redis.km2jzi.ng.0001.apse2.cache.amazonaws.com',
+        host: 'asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com',
         port: 6379
     }
 });

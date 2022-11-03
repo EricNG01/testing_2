@@ -11,7 +11,7 @@ const app = express();
 // This section will change for Cloud Services
 // Redis setup
 const redisClient = redis.createClient({
-    host: 'redis://asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com',
+    host: 'asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com',
     port: 6379
 });
 redisClient.connect()

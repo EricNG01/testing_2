@@ -49,7 +49,22 @@ app.get("/api/search", (req, res) => {
     } 
     });
 });
-
+app.get("/app", (req, res) => {
+    const redisKey = `ASM2`
+    redisClient.get(redisKey).then((result) => {
+      if (result) {
+        console.log(result);
+      } else {
+        redisClient.setEx(
+          redisKey,
+          3600,
+          JSON.stringify("testingString")
+        );
+        console.log("Storing");
+      }
+    })
+    res.json("testingString");
+})
 app.listen(3000, () => { 
     console.log('Server listening on port: ', 3000);
 })

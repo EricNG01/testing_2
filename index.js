@@ -1,3 +1,6 @@
+// ssh -i "n10641343_EN.pem" ubuntu@ec2-13-238-141-248.ap-southeast-2.compute.amazonaws.com
+// cd redis-stable
+// src/redis-cli -c -h asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com -p 6379
 const express = require('express');
 const responseTime = require('response-time') 
 const axios = require('axios');

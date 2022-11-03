@@ -1,6 +1,6 @@
 // ssh -i "n10641343_EN.pem" ubuntu@ec2-13-238-141-248.ap-southeast-2.compute.amazonaws.com
 // cd redis-stable
-// src/redis-cli -c -h asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com -p 6379
+// src/redis-cli -c -h spell-the-tweets.km2jzi.ng.0001.apse2.cache.amazonaws.com -p 6379
 const express = require('express');
 const responseTime = require('response-time') 
 const axios = require('axios');
@@ -12,7 +12,7 @@ const app = express();
 // Redis setup
 const redisClient = redis.createClient({
     socket: {
-        host: 'asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com',
+        host: 'spell-the-tweets.km2jzi.ng.0001.apse2.cache.amazonaws.com',
         port: 6379
     }
 });

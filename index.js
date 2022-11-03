@@ -8,7 +8,7 @@ const app = express();
 // This section will change for Cloud Services
 // Redis setup
 const redisClient = redis.createClient({
-    host: 'asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com'
+    host: 'redis://asm2-tesing-elasticache-for-redis.km2jzi.ng.0001.apse2.cache.amazonaws.com:6379'
 });
 redisClient.connect()
     .catch((err) => { 
@@ -17,38 +17,7 @@ redisClient.connect()
 
  // Used to display response time in HTTP header
 app.use(responseTime());
-app.get("/api/search", (req, res) => { 
-    const query = req.query.query.trim();
-    // Construct the wiki URL and redis key (reduced font size for clarity)
-    const searchUrl = `https://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&page=${query}`;
-    const redisKey = `wikipedia:${query}`; 
-    redisClient.setEx( 
-        redisKey, 
-        3600, 
-        JSON.stringify(`wikipedia:${query}`)
-    );
-    redisClient.get(redisKey).then((result) => { 
-    if (result) {
-        // Serve from redis
-        const resultJSON = JSON.parse(result);
-        res.json(resultJSON);
-    } else { 
-        // Serve from Wikipedia and store in redis
-        axios
-        .get(searchUrl) 
-        .then((response) => { 
-        const responseJSON = response.data; 
-        redisClient.setEx( 
-            redisKey, 
-            3600, 
-            JSON.stringify({ source: "Redis Cache", ...responseJSON })
-        );
-        res.json({ source: "Wikipedia API", ...responseJSON });
-        })
-        .catch((err) => res.json(err));
-    } 
-    });
-});
+
 app.get("/app", (req, res) => {
     const redisKey = `ASM2`
     redisClient.get(redisKey).then((result) => {
